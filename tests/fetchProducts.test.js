@@ -22,7 +22,6 @@ describe('1 - Teste a função fetchProducts', () => {
     expect(actual).toEqual(computadorSearch);
   });
   it('testa se um erro é passado caso chamar-mos a função sem parametro', async () => {
-    expect.assertions(1);
     try {
       await fetchProducts();
     } catch (error) {
