@@ -1,4 +1,4 @@
-const CACHE_KEY = 'cartItens';
+// const CACHE_KEY = 'cartItens';
 /**
  * Função responsável por criar e retornar o elemento de imagem do produto.
  * @param {string} imageSource - URL da imagem.
@@ -76,7 +76,15 @@ const emptyCart = () => {
   });
 };
 
-emptyCart();
+const loadingApi = () => {
+  const loadingText = document.querySelector('.loading');
+  loadingText.innerText = 'carregando...';
+};
+
+const removeLoading = () => {
+  const loadingText = document.querySelector('.loading');
+  loadingText.remove();
+};
 
 /**
  * Função responsável por criar e retornar um item do carrinho.
@@ -108,7 +116,9 @@ const addCartItens = (infoItens, index) => {
     });
 };
 const addProducts = async () => {
+  loadingApi();
   (await fetchProducts('computador')).results.forEach(async (product, index) => {
+    removeLoading();
     items.appendChild(createProductItemElement(product));
     const infoItens = await fetchItem(product.id);
     addCartItens(infoItens, index);
@@ -117,4 +127,5 @@ const addProducts = async () => {
 
 window.onload = async () => { 
   addProducts();
+  emptyCart();
 };
