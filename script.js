@@ -68,6 +68,16 @@ const cartItemClickListener = (event) => {
   totalPrice();
 };
 
+const emptyCart = () => {
+  const emptyButton = document.querySelector('.empty-cart');
+  emptyButton.addEventListener('click', () => {
+    cartItem.innerText = '';
+    totalPrice();
+  });
+};
+
+emptyCart();
+
 /**
  * Função responsável por criar e retornar um item do carrinho.
  * @param {Object} product - Objeto do produto.
