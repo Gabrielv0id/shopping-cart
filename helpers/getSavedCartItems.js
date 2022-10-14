@@ -1,5 +1,7 @@
-const getSavedCartItems = (key) => {
-  JSON.parse(localStorage.getItem(key));
+const CACHE_KEY = 'cartItens';
+
+const getSavedCartItems = () => {
+  localStorage.getItem(CACHE_KEY);
 };
 
 if (typeof module !== 'undefined') {

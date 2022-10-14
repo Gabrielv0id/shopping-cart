@@ -1,8 +1,9 @@
 const itens = [];
+const CACHE_KEY = 'cartItens';
 
-const saveCartItems = (key, { id, title, price }) => {
+const saveCartItems = ({ id, title, price }) => {
   itens.push({ id, title, price });
-  localStorage.setItem(key, JSON.stringify(itens));
+  localStorage.setItem(CACHE_KEY, JSON.stringify(itens));
 };
 
 if (typeof module !== 'undefined') {
