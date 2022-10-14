@@ -1,3 +1,4 @@
+const CACHE_KEY = 'cartItens';
 /**
  * Função responsável por criar e retornar o elemento de imagem do produto.
  * @param {string} imageSource - URL da imagem.
@@ -53,9 +54,18 @@ const getIdFromProductItem = (product) => product.querySelector('span.id').inner
 
 const cartItem = document.querySelector('.cart__items');
 
+const totalPrice = () => {
+  const priceHtml = document.querySelector('.total-price');
+  const listaItens = document.querySelectorAll('li');
+  let total = 0;
+  listaItens.forEach((item) => { total += Number(item.innerText.split('$')[1]); });
+  priceHtml.innerText = `R$ ${total.toFixed(2)}`;
+};
+
 const cartItemClickListener = (event) => {
   const clickedElement = event.target;
   cartItem.removeChild(clickedElement);
+  totalPrice();
 };
 
 /**
@@ -75,25 +85,25 @@ const createCartItemElement = ({ id, title, price }) => {
 }; 
 const items = document.querySelector('.items');
 
-const setItenOnLocal = (infoItens) => {
-  const saveItem = infoItens;
-  console.log(saveItem);
-  saveCartItems(saveItem);
-};
+// const setItenOnLocal = (infoItens) => {
+//   saveCartItems(CACHE_KEY, infoItens);
+// };
 
 const addCartItens = (infoItens, index) => {
   const buttons = document.querySelectorAll('.item__add');
       buttons[index].addEventListener('click', () => {
         cartItem.appendChild(createCartItemElement(infoItens));
-        setItenOnLocal(infoItens);
+      //  setItenOnLocal(infoItens);
+      totalPrice();
     });
 };
-const addProducts = async () =>  
+const addProducts = async () => {
   (await fetchProducts('computador')).results.forEach(async (product, index) => {
     items.appendChild(createProductItemElement(product));
     const infoItens = await fetchItem(product.id);
     addCartItens(infoItens, index);
   });
+};
 
 window.onload = async () => { 
   addProducts();
