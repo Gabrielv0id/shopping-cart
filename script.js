@@ -75,10 +75,17 @@ const createCartItemElement = ({ id, title, price }) => {
 }; 
 const items = document.querySelector('.items');
 
+const setItenOnLocal = (infoItens) => {
+  const saveItem = infoItens;
+  console.log(saveItem);
+  saveCartItems(saveItem);
+};
+
 const addCartItens = (infoItens, index) => {
   const buttons = document.querySelectorAll('.item__add');
       buttons[index].addEventListener('click', () => {
         cartItem.appendChild(createCartItemElement(infoItens));
+        setItenOnLocal(infoItens);
     });
 };
 const addProducts = async () =>  

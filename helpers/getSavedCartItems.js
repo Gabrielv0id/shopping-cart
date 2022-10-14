@@ -1,5 +1,7 @@
+const CACHE_KEY = 'cartItens';
+
 const getSavedCartItems = () => {
-  // seu código aqui
+  localStorage.getItem(CACHE_KEY);
 };
 
 if (typeof module !== 'undefined') {
